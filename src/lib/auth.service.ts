@@ -159,7 +159,10 @@ export class AuthService {
                     this._user = user;
                     this._authState.next(user);
                 }).catch(err => {
-                    return Observable.throwError(err);
+                    console.log(err);
+                    resolve();
+                    this._user = null;
+                    this._authState.next(null);
                 });
             } else {
                 reject(AuthService.ERR_LOGIN_PROVIDER_NOT_FOUND);
@@ -185,7 +188,10 @@ export class AuthService {
                         this._user = null;
                         this._authState.next(null);
                     }).catch((err) => {
-                        return Observable.throwError(err);
+                        console.log(err);
+                        resolve();
+                        this._user = null;
+                        this._authState.next(null);
                     });
                 } else {
                     reject(AuthService.ERR_LOGIN_PROVIDER_NOT_FOUND);
